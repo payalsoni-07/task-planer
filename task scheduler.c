@@ -4,7 +4,7 @@
 #include<string.h>
 #include<stdlib.h>
 //functions
-//void check_list();
+void delete();
 void edit_list(); 
 void create();
 char task_name[10];
@@ -26,14 +26,13 @@ void main(){
             break;
     /*    case 3:
             check_list();
-            break;
+            break;*/
         case 4: 
-            delete list();
-            break; */
+            delete();
+            break; 
         default:
             printf("Dear User! you have entered wrong choice.");
     }
-    getch();
 }
 void create(){
     FILE *fp;
@@ -41,7 +40,8 @@ void create(){
     printf("enter your name:");
     scanf("%s",&name);
     printf("\nenter the topic of task:");
-    scanf("%s",&task_name);
+    fflush(stdin);
+    gets(task_name);
     fp = fopen(name,"a+");
     printf("\nplease enter the details of your task:");
     fflush(stdin);
@@ -71,7 +71,7 @@ void edit_list(){
         }
     }
     else{
-        printf("\nenter the topic of new task:");
+    printf("\nenter the topic of new task:");
     scanf("%s",&task_name);
     printf("\nplease enter the details of new task:");
     fflush(stdin);
@@ -79,4 +79,11 @@ void edit_list(){
     fprintf(fp,"\nTOPIC:%s\n%s",task_name,task);
     fclose(fp);
     }
+}
+void delete(){
+    char name[15];
+    printf("enter your name:");
+    scanf("%s",&name);
+    remove(name);
+    printf("your task planer file has been deleted successfully.");
 }
